@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EDMStoreContainer" CdmEntityContainer="EDMContainer">
+    <EntitySetMapping Name="Empresas">
+      <EntityTypeMapping TypeName="IsTypeOf(EDM.Empresa)">
+        <MappingFragment StoreEntitySet="Empresas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cuentas">
+      <EntityTypeMapping TypeName="IsTypeOf(EDM.Cuenta)">
+        <MappingFragment StoreEntitySet="Cuentas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="periodo" ColumnName="periodo" />
+          <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Indicadores">
+      <EntityTypeMapping TypeName="IsTypeOf(EDM.Indicador)">
+        <MappingFragment StoreEntitySet="Indicadores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="formula" ColumnName="formula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Metodologias">
+      <EntityTypeMapping TypeName="IsTypeOf(EDM.Metodologia)">
+        <MappingFragment StoreEntitySet="Metodologias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Condiciones">
+      <EntityTypeMapping TypeName="IsTypeOf(EDM.Condicion)">
+        <MappingFragment StoreEntitySet="Condiciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MetodologiaId" ColumnName="MetodologiaId" />
+          <ScalarProperty Name="formula" ColumnName="formula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

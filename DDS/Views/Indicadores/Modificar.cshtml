@@ -1,0 +1,43 @@
+﻿@model DDS.Models.Indicador
+
+@{
+    ViewBag.Title = "Modificar indicador";
+}
+
+<form method="POST" action="Modificar">
+    <table style="margin: 0 auto">
+        <tr>
+            <td style="text-align:right">Indicador</td>
+            <td style="padding-left:10px">
+                <select name="nombreIndicador" style="min-width:200px">
+                    @foreach (string n in ViewBag.NombresIndicadores) {
+                        if (@n == ViewBag.NombreIndicador) {
+                            <option selected>@n</option>
+                        } else {
+                            <option>@n</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Fórmula</td>
+            <td style="padding-left:10px">
+                @if (ViewBag.Fórmula != "") {
+                    <input style="margin: 5px auto; min-width:200px" type="text" name="fórmula" value="@ViewBag.Fórmula" />
+                } else {
+                    <input style="margin: 5px auto; min-width:200px" type="text" name="fórmula" disabled />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @if (ViewBag.Fórmula != "") {
+                    <input type="submit" value="Modificar" />
+                } else {
+                    <input type="submit" value="Cargar" />
+                }
+            </td>
+        </tr>
+    </table>
+</form>

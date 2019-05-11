@@ -1,0 +1,32 @@
+﻿@model DDS.Models.Usuario
+
+@{
+    ViewBag.Title = "Inicio de sesión";
+    Layout = "~/Views/Shared/_FooterLessLayout.cshtml";
+}
+
+@using (Html.BeginForm("Validate", "Login")) {
+    <table style="margin: 0 auto">
+        <tr>
+            <td style="text-align:right">Usuario</td>
+            <td style="padding-left:10px">
+                <input required="required" type="text" name="Nombre" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:right">Contraseña</td>
+            <td style="padding-left:10px">
+                <input required="required" type="password" name="Password" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Enviar" />
+            </td>
+        </tr>
+    </table>
+}
+
+@if (TempData["Error"] != null) {
+    <span style="color:red; display:table; margin: 0 auto; text-align:center">@TempData["Error"].ToString()</span>
+}

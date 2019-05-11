@@ -1,0 +1,25 @@
+﻿@model DDS.Models.Indicador
+
+@{
+    ViewBag.Title = "Borrar indicador";
+}
+
+<form method="POST" action="Borrar">
+    <table style="margin: 0 auto">
+        <tr>
+            <td style="text-align:right">Indicador</td>
+            <td style="padding-left:10px">
+                <select name="nombreIndicador" style="min-width:200px">
+                    @foreach (string n in ViewBag.NombresIndicadores) {
+                            <option>@n</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Borrar" />
+            </td>
+        </tr>
+    </table>
+</form>

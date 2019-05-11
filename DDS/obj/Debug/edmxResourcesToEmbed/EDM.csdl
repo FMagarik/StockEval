@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EDM" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="EDMContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Empresas" EntityType="EDM.Empresa" />
+    <EntitySet Name="Cuentas" EntityType="EDM.Cuenta" />
+    <EntitySet Name="Indicadores" EntityType="EDM.Indicador" />
+    <EntitySet Name="Metodologias" EntityType="EDM.Metodologia" />
+    <EntitySet Name="Condiciones" EntityType="EDM.Condicion" />
+    <AssociationSet Name="CuentaEmpresa" Association="EDM.CuentaEmpresa">
+      <End Role="Cuenta" EntitySet="Cuentas" />
+      <End Role="Empresa" EntitySet="Empresas" />
+    </AssociationSet>
+    <AssociationSet Name="MetodologiaCondicion" Association="EDM.MetodologiaCondicion">
+      <End Role="Metodologia" EntitySet="Metodologias" />
+      <End Role="Condicion" EntitySet="Condiciones" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Empresa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="255" />
+    <Property Name="valor" Type="Double" Nullable="false" />
+    <Property Name="periodo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Empresa" Relationship="EDM.CuentaEmpresa" FromRole="Cuenta" ToRole="Empresa" />
+    <Property Name="EmpresaId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Indicador">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="255" />
+    <Property Name="formula" Type="String" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Metodologia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Condicion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Metodologia" Relationship="EDM.MetodologiaCondicion" FromRole="Condicion" ToRole="Metodologia" />
+    <Property Name="MetodologiaId" Type="Int32" Nullable="false" />
+    <Property Name="formula" Type="String" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <Association Name="CuentaEmpresa">
+    <End Type="EDM.Cuenta" Role="Cuenta" Multiplicity="*" />
+    <End Type="EDM.Empresa" Role="Empresa" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="EmpresaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetodologiaCondicion">
+    <End Type="EDM.Metodologia" Role="Metodologia" Multiplicity="1" />
+    <End Type="EDM.Condicion" Role="Condicion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Metodologia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Condicion">
+        <PropertyRef Name="MetodologiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

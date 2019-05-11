@@ -1,0 +1,24 @@
+﻿@model DDS.Models.Cuenta
+
+@{
+    ViewBag.Title = "Importar cuentas en lote";
+}
+
+<table style="margin: 0 auto">
+    <tr>
+        <td style="text-align:right">Número de Archivos:</td>
+        <td style="padding-left:10px">
+            @ViewBag.NúmeroArchivos
+        </td>
+    </tr>
+</table>
+
+<form method="POST" action="ProcesarLotes" enctype="multipart/form-data">
+    <p>
+        @if (ViewBag.NúmeroArchivos > 0) {
+            <input type="submit" value="Procesar" />
+        } else {
+            <input type="submit" value="Procesar" disabled />
+        }
+    </p>
+</form>

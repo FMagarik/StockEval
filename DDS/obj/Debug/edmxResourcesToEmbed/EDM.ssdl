@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EDM.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EDMStoreContainer">
+    <EntitySet Name="Empresas" EntityType="EDM.Store.Empresas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cuentas" EntityType="EDM.Store.Cuentas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Indicadores" EntityType="EDM.Store.Indicadores" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Metodologias" EntityType="EDM.Store.Metodologias" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Condiciones" EntityType="EDM.Store.Condiciones" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CuentaEmpresa" Association="EDM.Store.CuentaEmpresa">
+      <End Role="Cuenta" EntitySet="Cuentas" />
+      <End Role="Empresa" EntitySet="Empresas" />
+    </AssociationSet>
+    <AssociationSet Name="MetodologiaCondicion" Association="EDM.Store.MetodologiaCondicion">
+      <End Role="Metodologia" EntitySet="Metodologias" />
+      <End Role="Condicion" EntitySet="Condiciones" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Empresas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Cuentas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="valor" Type="float" Nullable="false" />
+    <Property Name="periodo" Type="int" Nullable="false" />
+    <Property Name="EmpresaId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Indicadores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="formula" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Metodologias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Condiciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MetodologiaId" Type="int" Nullable="false" />
+    <Property Name="formula" Type="nvarchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <Association Name="CuentaEmpresa">
+    <End Role="Cuenta" Type="EDM.Store.Cuentas" Multiplicity="*" />
+    <End Role="Empresa" Type="EDM.Store.Empresas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Empresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="EmpresaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MetodologiaCondicion">
+    <End Role="Metodologia" Type="EDM.Store.Metodologias" Multiplicity="1" />
+    <End Role="Condicion" Type="EDM.Store.Condiciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Metodologia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Condicion">
+        <PropertyRef Name="MetodologiaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
